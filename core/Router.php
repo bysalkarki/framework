@@ -36,7 +36,7 @@ class Router
         $callback=$this -> routes[$method][$path] ?? false;
         if (!$callback) {
             Application ::$app -> response -> setStatusCode(404);
-            echo 'not found';
+            echo $this->renderView('exceptions/_404');
         }
         if (is_string($callback)) {
             return $this -> renderView($callback);
@@ -45,12 +45,11 @@ class Router
 
     }
 
-    private function renderView (string $view)
+    public function renderView (string $view,$params = [])
     {
         $layoutContent=$this -> layoutContent();
-        $viewContent=$this -> renderOnlyView($view);
+        $viewContent=$this -> renderOnlyView($view,$params);
         return str_replace("{{CONTENT}}", $viewContent, $layoutContent);
-
     }
 
     private function layoutContent ()
@@ -60,11 +59,17 @@ class Router
         return ob_get_clean();
     }
 
-    protected function renderOnlyView (string $view)
+    protected function renderOnlyView (string $view,array $params)
     {
         ob_start();
         include_once Application ::$ROOT_DIR . "/views/$view.php";
         return ob_get_clean();
+    }
+
+    private function renderContent (string $view)
+    {
+        $layoutContent=$this -> layoutContent();
+        return str_replace("{{CONTENT}}", $view, $layoutContent);
     }
 
 
