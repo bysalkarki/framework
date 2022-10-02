@@ -35,7 +35,7 @@
     </div>
 </nav>
 
-{{content}}
+{{CONTENT}}
 
 <!-- Optional JavaScript; choose one of the two! -->
 
