@@ -3,12 +3,13 @@
 namespace app\controllers;
 
 use app\core\Application;
+use app\core\Request;
 
 class SiteController extends  Controller
 {
-    public function handleContact (): string
+    public function handleContact (Request  $request): string
     {
-        return 'handeling submiteed data';
+        $request->getBody();
     }
 
     public function contact ()

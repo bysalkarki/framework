@@ -32,7 +32,7 @@ class Router
     public function resolve ()
     {
         $path=$this -> request -> getPath();
-        $method=$this -> request -> getMethod();
+        $method=$this -> request -> method();
         $callback=$this -> routes[$method][$path] ?? false;
         if (!$callback) {
             Application ::$app -> response -> setStatusCode(404);
@@ -41,7 +41,7 @@ class Router
         if (is_string($callback)) {
             return $this -> renderView($callback);
         }
-        return call_user_func($callback);
+        return call_user_func($callback,$this->request);
 
     }
 
