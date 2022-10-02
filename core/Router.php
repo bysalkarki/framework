@@ -29,9 +29,21 @@ class Router
        $callback = $this->routes[$method][$path] ?? false;
        if(!$callback){
            echo 'not found';
-           exit;
        }
-       call_user_func($callback);
+       if(is_string($callback)){
+           return $this->renderView($callback);
+       }
+       return call_user_func($callback);
 
     }
+
+    private function renderView (string $view) {
+        $layoutContent = $this->layoutContent();
+        include_once Application::$ROOT_DIR."/views/$view.php";
+    }
+
+    private function layoutContent () {
+        include_once Application::$ROOT_DIR."/views/main.php";
+    }
+
 }
