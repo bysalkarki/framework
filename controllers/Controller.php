@@ -6,7 +6,7 @@ use app\core\Application;
 
 class Controller
 {
-    public function view (string $view, $params)
+    public function render (string $view, array $params)
     {
         return Application ::$app -> router -> renderView($view,$params);
     }

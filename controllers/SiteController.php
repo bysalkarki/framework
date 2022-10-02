@@ -13,13 +13,13 @@ class SiteController extends  Controller
 
     public function contact ()
     {
-       return $this->view('contact');
+       return $this->render('contact');
     }
 
     public function home(){
         $params = [
             'name'=>'this is test'
         ];
-        return $this->view('home',$params);
+        return $this->render('home',$params);
     }
 }
